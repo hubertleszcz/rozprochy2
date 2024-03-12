@@ -1,39 +1,37 @@
 int NWD(int a, int b) {
-    while (b != 0) {
-        int temp = b;
-        b = a % b;
-        a = temp;
-    }
-    return a;
+    if(a==b) return a;
+    else if(a==0 || b==0) return 0;
+    else return (a<b) ? NWD(a,b-a) : NWD(a-b,b);
 }
 
 int NWW(int a, int b) {
+    if(a==0 || b==0) return 0;
     return (a * b) / NWD(a, b);
 }
 
-int silnia(int a){
-    int result = 1;
-    for(int i=1;i<=a;i++){
+unsigned int silnia(int number){
+    if(number > 12 || number < 0){
+        printf("Nieprawidlowa liczba\n");
+        return 0;
+    }
+    unsigned int result = 1;
+    for(int i=1;i<=number;i++){
         result *= i;
     }
-
     return result;
 }
 
-int power(int x, int n){
-    int result = 1;
-    for(int i=0;i<n;i++){
-        result*= x;
+unsigned int dwumianNewtona(int up, int down){
+    if(up > 12 || down > 12 || up < down || up < 0 || down < 0){
+        printf("Nieprawidlowa liczba\n");
+        return 0;
     }
-    return result;
+    return(silnia(up)/(silnia(down) * silnia(up-down)));
+
+
 }
 
-double mcLaurenEuler(int x){
-    double result = 0.0f;
-    for(int n = 0; n <= 5; n++){
-        double sumaElement = (double)power(x,n);
-        sumaElement /= silnia(n);
-        result += sumaElement;
-    }
-    return result;
+unsigned int fibonacciNum(int number){
+	if(number == 0 || number==1) return 1;
+	else return fibonacciNum(number-1) + fibonacciNum(number-2);	
 }
